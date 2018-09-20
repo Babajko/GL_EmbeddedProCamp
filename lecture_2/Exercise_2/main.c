@@ -1,21 +1,18 @@
 #include <stdio.h>
 #include <stdint.h>
 
-void convertRgb888ToRgb656(uint8_t *r,
-                           uint8_t *g,
-                           uint8_t *b)
+uint16_t convertRgb888ToRgb656(uint32_t rgb)
 {
-    *r = *r >> 2;
-    *g = *g >> 3;
-    *b = *b >> 2;
+    uint8_t r = (uint8_t)(rgb >> 16) >> 2;
+    uint8_t g = (uint8_t)(rgb >> 8) >> 3;
+    uint8_t b = (uint8_t)(rgb >> 0) >> 2;
+    
+    return (r << 12) | (g << 6) | b;
 }
 
 int main()
 {
-    uint8_t r, g, b;
-    r = g = b =255;
-    convertRgb888ToRgb656(&r, &g, &b);
-    printf("r=%x g=%x b=%x", r, g, b);
+    printf("rgb = %x", convertRgb888ToRgb656(26880));
     
     return 0;
 }
