@@ -10,7 +10,7 @@ typedef struct node
 
 void listAdd(const node_t * head, int val) 
 {
-    node_t * current = head++;
+    node_t * current = head;
     while (current->next != NULL) 
     {
         current = current->next;
