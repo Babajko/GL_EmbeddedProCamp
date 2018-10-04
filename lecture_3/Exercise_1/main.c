@@ -14,7 +14,7 @@ void strCopy(char * sIn, char * sOut)
 int main()
 {   
     char * sIn = "Hello world!!!";
-    char * sOut[100];
+    char sOut[100];
    
     printf("sIn = %s\n", sIn);
     strCopy(sIn, sOut);
