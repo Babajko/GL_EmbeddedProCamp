@@ -10,5 +10,5 @@
 *.sct
 *.dep
 *.iex
-/lecture_1/Exercise_1/Blink/MDK-ARM/Blink.uvgui.Babajko
-/lecture_1/Exercise_1/Blink/MDK-ARM/Blink.uvopt
+*.Babajko
+*.uvopt
