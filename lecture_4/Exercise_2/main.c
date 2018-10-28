@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef enum { false, true } bool;
+
 typedef struct node 
 {
     int val;
@@ -8,9 +10,10 @@ typedef struct node
 } node_t;
 
 
+
 void listPrint(const node_t * head) 
 {
-    node_t * current = head;
+    const node_t * current = head;
 
     while (current != NULL) 
     {
@@ -19,13 +22,18 @@ void listPrint(const node_t * head)
     }
 }
 
-void push(node_t ** head, int val) {
+bool push(node_t ** head, int val) {
     node_t * new_node;
     new_node = malloc(sizeof(node_t));
+    if (NULL == new_node)
+    {
+        return false;
+    }
 
     new_node->val = val;
     new_node->next = *head;
     *head = new_node;
+    return true;
 }
 
 int pop(node_t ** head) {
@@ -47,7 +55,7 @@ int pop(node_t ** head) {
 
 int read(const node_t * head, int n) 
 {
-    node_t * current = head;
+    const node_t * current = head;
     int retval = -1;
     
     if (head == NULL) 

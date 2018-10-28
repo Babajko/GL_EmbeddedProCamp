@@ -1,69 +1,69 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Queue
+typedef struct 
 {
 	int size;
 	int writePoint;
 	int readPoint;
 	void* storage;
-} Queue_t;
+} Queue;
 
-enum errorCode
+typedef enum 
 {
-	none,
-	mismatchMemory
-};
+	NONE,
+	MISMATCH_MEMORY
+} errorCode;
 
-errorCode writeQ(Queue_t * q, int writeData)
+errorCode writeQ(Queue * q, int writeData)
 {
 	int * arr;
 	arr = (int*)q->storage;
 	if (q->writePoint >= q->size)
 	{
-		return mismatchMemory;
+		return MISMATCH_MEMORY;
 	}
 
 	arr[q->writePoint] = writeData;
 	q->writePoint++;
 
-	return none;
+	return NONE;
 }
 
-errorCode readQ(Queue_t * q, int * rValue)
+errorCode readQ(Queue * q, int * rValue)
 {
 	int * arr;
 	arr = (int*)q->storage;
 
 	if (q->readPoint == q->writePoint)
 	{
-		return mismatchMemory;
+		return MISMATCH_MEMORY;
 	}
 
 	*rValue = arr[q->readPoint];
 	q->readPoint++;
-	return none;
+	return NONE;
 }
 
-errorCode createQ(Queue_t * q, int size)
+errorCode createQ(Queue * q, int size)
 {
 	q->size = size;
 	q->writePoint = 0;
 	q->readPoint = 0;
 	q->storage = malloc(sizeof(int) * size);
-	return NULL != q->storage ? none : mismatchMemory;
+	return NULL != q->storage ? NONE : MISMATCH_MEMORY;
 }
 
-errorCode deleteQ(Queue_t * q)
+errorCode deleteQ(Queue * q)
 {
 	free(q->storage);
-	return none;
+	return NONE;
 }
 
 int main()
 {
-	Queue_t  queue;
-	int rV{0};
+	Queue  queue;
+	int rV = 0;
 
 	createQ(&queue, 5);
 
