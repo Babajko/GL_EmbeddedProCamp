@@ -13,15 +13,14 @@ int listAdd(const node_t * head, int val)
 	if (NULL == head)
 	{
 		return -1;
-	}
-    node_t * current = head;
-    while (current->next != NULL) 
-    {
-        current = current->next;
-    }
-
-    /* now we can add a new variable */
-    current->next = malloc(sizeof(node_t));
+  }
+  node_t * current = head;
+  while (current->next != NULL) 
+  {
+      current = current->next;
+  }
+  /* now we can add a new variable */
+  current->next = malloc(sizeof(node_t));
 	if (NULL == current->next)
 	{
 		return -1;
