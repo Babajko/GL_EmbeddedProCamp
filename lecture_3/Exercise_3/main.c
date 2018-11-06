@@ -8,18 +8,26 @@ typedef struct node
 } node_t;
 
 
-void listAdd(const node_t * head, int val) 
+int listAdd(const node_t * head, int val) 
 {
-    node_t * current = head;
-    while (current->next != NULL) 
-    {
-        current = current->next;
-    }
-
-    /* now we can add a new variable */
-    current->next = malloc(sizeof(node_t));
+	if (NULL == head)
+	{
+		return -1;
+  }
+  node_t * current = head;
+  while (current->next != NULL) 
+  {
+      current = current->next;
+  }
+  /* now we can add a new variable */
+  current->next = malloc(sizeof(node_t));
+	if (NULL == current->next)
+	{
+		return -1;
+	} 
     current->next->val = val;
     current->next->next = NULL;
+	return 0;
 }
 
 void listPrint(const node_t * head) 
@@ -108,6 +116,10 @@ int main()
     node_t * list = NULL;
     
     list = malloc(sizeof(node_t));
+	if (NULL == list)
+	{
+		return -1;  //Next steps don't matters
+	}
     list->val = 15;
     list->next = NULL;
     listAdd(list, 20);
